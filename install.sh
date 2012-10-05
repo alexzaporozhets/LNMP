@@ -34,4 +34,7 @@ pear install --alldeps phpunit/PHPUnit
 # ZendFramework
 wget http://packages.zendframework.com/releases/ZendFramework-1.12.0/ZendFramework-1.12.0-minimal.tar.gz
 mkdir /usr/local/zend
-tar -C /usr/local/zend -zxvf ZendFramework-1.12.0-minimal.tar.gz
+mkdir /usr/local/zend/share
+tar -C /usr/local/zend/share -zxvf ZendFramework-1.12.0-minimal.tar.gz
+ln -s /usr/local/zend/share/ZendFramework-1.12.0-minimal/bin/zf.sh /usr/local/bin/zf
+
