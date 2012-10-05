@@ -21,4 +21,14 @@ apt-get update --force-yes -y
 apt-get upgrade --force-yes -y
 apt-get dist-upgrade --force-yes -y
 
-apt-get install --force-yes -y nginx percona-server-server-5.5 percona-server-client-5.5 php5-cli php5-fpm
+apt-get install --force-yes -y nginx percona-server-server-5.5 percona-server-client-5.5 php5-cli php5-fpm pear 
+apt-get install --force-yes -y vim htop mc
+
+# PHPUnit
+pear channel-discover pear.phpunit.de
+pear install --alldeps phpunit/PHPUnit
+
+# ZendFramework
+wget http://packages.zendframework.com/releases/ZendFramework-1.12.0/ZendFramework-1.12.0-minimal.tar.gz
+mkdir /usr/local/zend
+tar -C /usr/local/zend -zxvf ZendFramework-1.12.0-minimal.tar.gz
