@@ -5,6 +5,7 @@
 
 echo >> /etc/apt/sources.list 
 echo "deb http://ppa.launchpad.net/ondrej/php5/ubuntu precise main"  >> /etc/apt/sources.list
+echo "deb-src http://ppa.launchpad.net/ondrej/php5/ubuntu precise main"  >> /etc/apt/sources.list 
 
 # Percona 5.5
 # http://www.percona.com/doc/percona-server/5.5/installation/apt_repo.html
@@ -21,10 +22,12 @@ apt-get update --force-yes -y
 apt-get upgrade --force-yes -y
 apt-get dist-upgrade --force-yes -y
 
-apt-get install --force-yes -y nginx percona-server-server-5.5 percona-server-client-5.5 php5-cli php5-fpm pear 
+apt-get install --force-yes -y nginx percona-server-server-5.5 percona-server-client-5.5 php5-cli php5-fpm php-pear 
 apt-get install --force-yes -y vim htop mc
 
 # PHPUnit
+pear config-set auto_discover 1
+pear channel-discover pear.symfony.com
 pear channel-discover pear.phpunit.de
 pear install --alldeps phpunit/PHPUnit
 
