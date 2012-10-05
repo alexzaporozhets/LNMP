@@ -3,8 +3,8 @@
 # PHP 5.4
 # http://www.barryodonovan.com/index.php/2012/05/22/ubuntu-12-04-precise-pangolin-and-php-5-4-again
 
-apt-get install python-software-properties
-add-apt-repository ppa:ondrej/php5
+sudo apt-get install python-software-properties
+sudo add-apt-repository ppa:ondrej/php5
 
 apt-get update
 apt-get upgrade
