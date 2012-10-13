@@ -23,7 +23,16 @@ apt-get upgrade --force-yes -y
 apt-get dist-upgrade --force-yes -y
 
 apt-get install --force-yes -y nginx percona-server-server-5.5 percona-server-client-5.5 php5-cli php5-fpm php-pear 
-apt-get install --force-yes -y vim htop mc
+apt-get install --force-yes -y vim htop mc git
+
+# Creating website folder
+mkdir /var/www
+chown www-data /var/www
+
+# Nginx default site
+mkdir /var/www/default
+chown www-data /var/www/default
+wget -P /path/for/save ftp://ftp.example.org/some_file.iso
 
 # PHPUnit
 pear config-set auto_discover 1
@@ -38,3 +47,5 @@ mkdir /usr/local/zend/share
 tar -C /usr/local/zend/share -zxvf ZendFramework-1.12.0-minimal.tar.gz
 ln -s /usr/local/zend/share/ZendFramework-1.12.0-minimal/bin/zf.sh /usr/local/bin/zf
 
+# Samba
+apt-get install --force-yes -y samba
