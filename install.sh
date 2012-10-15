@@ -32,7 +32,9 @@ chown www-data /var/www
 # Nginx default site
 mkdir /var/www/default
 chown www-data /var/www/default
-wget -P /path/for/save ftp://ftp.example.org/some_file.iso
+wget -P /etc/nginx/sites-enabled/ https://raw.github.com/alexzaporozhets/LNMP/master/etc/nginx/sites-enabled/default
+wget -P /var/www/default/ https://raw.github.com/alexzaporozhets/LNMP/master/var/www/default/index.php
+
 
 # PHPUnit
 pear config-set auto_discover 1
