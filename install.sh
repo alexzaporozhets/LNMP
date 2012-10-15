@@ -4,8 +4,8 @@
 # http://www.barryodonovan.com/index.php/2012/05/22/ubuntu-12-04-precise-pangolin-and-php-5-4-again
 
 echo >> /etc/apt/sources.list 
-echo "deb http://ppa.launchpad.net/ondrej/php5/ubuntu precise main"  >> /etc/apt/sources.list
-echo "deb-src http://ppa.launchpad.net/ondrej/php5/ubuntu precise main"  >> /etc/apt/sources.list 
+echo "deb http://ppa.launchpad.net/ondrej/php5/ubuntu precise main" >> /etc/apt/sources.list
+echo "deb-src http://ppa.launchpad.net/ondrej/php5/ubuntu precise main" >> /etc/apt/sources.list
 
 # Percona 5.5
 # http://www.percona.com/doc/percona-server/5.5/installation/apt_repo.html
@@ -22,7 +22,14 @@ apt-get update --force-yes -y
 apt-get upgrade --force-yes -y
 apt-get dist-upgrade --force-yes -y
 
-apt-get install --force-yes -y nginx percona-server-server-5.5 percona-server-client-5.5 php5-cli php5-fpm php-pear 
+# Percona 5.5 with perilled password
+dbpass="root" && export dbpass
+export DEBIAN_FRONTEND=noninteractive
+echo percona-server-server-5.5 percona-server-server-5.5/root_password password $dbpass | debconf-set-selections
+echo percona-server-server-5.5 percona-server-server-5.5/root_password_again password $dbpass | debconf-set-selections
+apt-get -y install percona-server-server-5.5
+
+apt-get install --force-yes -y nginx percona-server-client-5.5 php5-cli php5-fpm php-pear php5-gd
 apt-get install --force-yes -y vim htop mc git
 
 # Creating website folder
@@ -32,7 +39,9 @@ chown www-data /var/www
 # Nginx default site
 mkdir /var/www/default
 chown www-data /var/www/default
-wget -P /etc/nginx/sites-enabled/ https://raw.github.com/alexzaporozhets/LNMP/master/etc/nginx/sites-enabled/default
+rm -R /etc/nginx/sites-available/*
+rm -R /var/www/default
+wget -P /etc/nginx/sites-available/ https://raw.github.com/alexzaporozhets/LNMP/master/etc/nginx/sites-enabled/default
 wget -P /var/www/default/ https://raw.github.com/alexzaporozhets/LNMP/master/var/www/default/index.php
 
 
@@ -51,3 +60,9 @@ ln -s /usr/local/zend/share/ZendFramework-1.12.0-minimal/bin/zf.sh /usr/local/bi
 
 # Samba
 apt-get install --force-yes -y samba
+rm /etc/samba/smb.conf
+wget -P /etc/samba/ https://raw.github.com/alexzaporozhets/LNMP/master/etc/samba/smb.conf
+service smbd restart
+
+# restarting services
+service nginx restart
