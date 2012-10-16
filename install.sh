@@ -34,16 +34,18 @@ apt-get install --force-yes -y vim htop mc git
 
 # Creating website folder
 mkdir /var/www
-chown www-data /var/www
 
 # Nginx default site
 mkdir /var/www/default
-chown www-data /var/www/default
-rm -R /etc/nginx/sites-available/*
 rm -R /var/www/default
-wget -P /etc/nginx/sites-available/ https://raw.github.com/alexzaporozhets/LNMP/master/etc/nginx/sites-enabled/default
 wget -P /var/www/default/ https://raw.github.com/alexzaporozhets/LNMP/master/var/www/default/index.php
 
+# Add Nginx-conf
+rm -R /etc/nginx/sites-available/*
+wget -P /etc/nginx/sites-available/ https://raw.github.com/alexzaporozhets/LNMP/master/etc/nginx/sites-enabled/default
+
+# set correct owner
+chown -R www-data.www-data /var/www
 
 # PHPUnit
 pear config-set auto_discover 1
@@ -62,7 +64,8 @@ ln -s /usr/local/zend/share/ZendFramework-1.12.0-minimal/bin/zf.sh /usr/local/bi
 apt-get install --force-yes -y samba
 rm /etc/samba/smb.conf
 wget -P /etc/samba/ https://raw.github.com/alexzaporozhets/LNMP/master/etc/samba/smb.conf
-service smbd restart
+
 
 # restarting services
 service nginx restart
+service smbd restart
