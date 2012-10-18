@@ -59,8 +59,8 @@ mkdir /usr/local/zend
 mkdir /usr/local/zend/share
 tar -C /usr/local/zend/share -zxvf ZendFramework-1.12.0-minimal.tar.gz
 ln -s /usr/local/zend/share/ZendFramework-1.12.0-minimal/bin/zf.sh /usr/local/bin/zf
-echo 'include_path = ".:/usr/share/php:/usr/share/pear:/usr/local/zend/share/ZendFramework/library:/usr/local/zend/share/pear"' >> /etc/php5/fpm/php.ini
-echo 'include_path = ".:/usr/share/php:/usr/share/pear:/usr/local/zend/share/ZendFramework/library:/usr/local/zend/share/pear"' >> /etc/php5/cli/php.ini
+echo 'include_path = ".:/usr/share/php:/usr/local/zend/share/ZendFramework-1.12.0-minimal/library"' >> /etc/php5/fpm/php.ini
+echo 'include_path = ".:/usr/share/php:/usr/local/zend/share/ZendFramework-1.12.0-minimal/library"' >> /etc/php5/cli/php.ini
 
 # Samba
 apt-get install --force-yes -y samba
