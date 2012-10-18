@@ -29,7 +29,7 @@ echo percona-server-server-5.5 percona-server-server-5.5/root_password password 
 echo percona-server-server-5.5 percona-server-server-5.5/root_password_again password $dbpass | debconf-set-selections
 apt-get -y install percona-server-server-5.5
 
-apt-get install --force-yes -y nginx percona-server-client-5.5 php5-cli php5-fpm php-pear php5-gd
+apt-get install --force-yes -y nginx percona-server-client-5.5 php5-cli php5-fpm php-pear php5-gd php5-mysql
 apt-get install --force-yes -y vim htop mc git
 
 # Creating website folder
@@ -59,6 +59,8 @@ mkdir /usr/local/zend
 mkdir /usr/local/zend/share
 tar -C /usr/local/zend/share -zxvf ZendFramework-1.12.0-minimal.tar.gz
 ln -s /usr/local/zend/share/ZendFramework-1.12.0-minimal/bin/zf.sh /usr/local/bin/zf
+echo 'include_path = ".:/usr/share/php:/usr/share/pear:/usr/local/zend/share/ZendFramework/library:/usr/local/zend/share/pear"' >> /etc/php5/fpm/php.ini
+echo 'include_path = ".:/usr/share/php:/usr/share/pear:/usr/local/zend/share/ZendFramework/library:/usr/local/zend/share/pear"' >> /etc/php5/cli/php.ini
 
 # Samba
 apt-get install --force-yes -y samba
